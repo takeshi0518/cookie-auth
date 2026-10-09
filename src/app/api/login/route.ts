@@ -3,9 +3,9 @@ import { findUserByCredentials } from "@/lib/users";
 import { NextRequest, NextResponse } from "next/server";
 
 function safeCallbackUrl(value: FormDataEntryValue | null): string {
-  if (typeof value !== "string") return "/dashbaord";
-  if (!value.startsWith("/")) return "/dashbaord";
-  if (value.startsWith("/") || value.startsWith("/\\")) return "/dashbaord";
+  if (typeof value !== "string") return "/dashboard";
+  if (!value.startsWith("/")) return "/dashboard";
+  if (value.startsWith("/") || value.startsWith("/\\")) return "/dashboard";
   return value;
 }
 
