@@ -16,6 +16,10 @@ export default function DashboardPage() {
       <h1>ダッシュボード</h1>
       <p>ログイン中: {user.email}</p>
       <p>ロール: {user.role}</p>
+
+      <form method="POST" action="/api/logout">
+        <button type="submit">ログアウト</button>
+      </form>
     </main>
   );
 }
