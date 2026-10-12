@@ -1,11 +1,8 @@
-import { SESSION_COOKIE } from "@/lib/session";
-import { findByUserById } from "@/lib/users";
-import { cookies } from "next/headers";
+import { getCurrentUser } from "@/lib/auth";
 import { redirect } from "next/navigation";
 
 export default function DashboardPage() {
-  const userId = cookies().get(SESSION_COOKIE)?.value;
-  const user = userId ? findByUserById(userId) : null;
+  const user = getCurrentUser();
 
   if (!user) {
     redirect("/login?callbackUrl=/dashboard");
