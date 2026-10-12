@@ -1,4 +1,5 @@
 import { SESSION_COOKIE } from "@/lib/session";
+import { sign } from "@/lib/sign";
 import { findUserByCredentials } from "@/lib/users";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -32,7 +33,7 @@ export async function POST(request: NextRequest) {
     303
   );
 
-  response.cookies.set(SESSION_COOKIE, user.id, {
+  response.cookies.set(SESSION_COOKIE, await sign(user.id), {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
