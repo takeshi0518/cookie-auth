@@ -1,8 +1,8 @@
 import { getCurrentUser } from "@/lib/auth";
 import { redirect } from "next/navigation";
 
-export default function Admin() {
-  const user = getCurrentUser();
+export default async function Admin() {
+  const user = await getCurrentUser();
 
   if (!user) {
     redirect("/login?callbackUrl=/admin");

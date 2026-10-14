@@ -1,10 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { SESSION_COOKIE } from "./lib/session";
+import { unsign } from "./lib/sign";
 
-export function middleware(request: NextRequest) {
-  const session = request.cookies.get(SESSION_COOKIE);
+export async function middleware(request: NextRequest) {
+  const raw = request.cookies.get(SESSION_COOKIE)?.value;
+  const userId = raw ? await unsign(raw) : null;
 
-  if (!session) {
+  if (!userId) {
     const loginUrl = new URL("/login", request.url);
     const { pathname, search } = request.nextUrl;
     loginUrl.searchParams.set("callbackUrl", pathname + search);
