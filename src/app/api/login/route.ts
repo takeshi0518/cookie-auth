@@ -6,7 +6,7 @@ import { NextRequest, NextResponse } from "next/server";
 function safeCallbackUrl(value: FormDataEntryValue | null): string {
   if (typeof value !== "string") return "/dashboard";
   if (!value.startsWith("/")) return "/dashboard";
-  if (value.startsWith("/") || value.startsWith("/\\")) return "/dashboard";
+  if (value.startsWith("//") || value.startsWith("/\\")) return "/dashboard";
   return value;
 }
 
